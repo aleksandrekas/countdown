@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body{
+    font-family: sans-serif;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-color:#241E2C ;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.stars{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+}
+
+.hills{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 5;
+}
