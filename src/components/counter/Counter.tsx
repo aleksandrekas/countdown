@@ -4,8 +4,6 @@ type timeSegment = {
     first:string
     second:string
 }
-
-
 type timeType ={
     days:timeSegment
     hours:timeSegment
@@ -21,7 +19,10 @@ export default function Counter(){
         seconds:{first:"0",second:"0"}
     })
 
+
     const targetRef = useRef<Date>(new Date(Date.now() + 2 * 24 * 60 * 60 * 1000));
+    const prevTime = useRef(time)
+    const container = useRef<HTMLDivElement>(null)
 
     function splitDigits(num:number){
         const string = num.toString().padStart(2,'0') 
@@ -46,114 +47,179 @@ export default function Counter(){
         });
     }
 
-    useEffect(()=>{},[time.days])
-    useEffect(()=>{},[time.hours])
-    useEffect(()=>{},[time.minutes])
-    useEffect(()=>{},[time.seconds])
+    function compareTimeSegments(segment:string){
+        return `${time[segment].first}${time[segment].second}` === `${prevTime.current[segment].first}${prevTime.current[segment].second}`
+    }
 
+
+    function flip(segment:string){
+        const seconds = container.current?.querySelector(`#${segment}`);
+        if (!seconds) return;
+
+        const overlayDiv = seconds.querySelector('.overlay');
+        const displayDiv = seconds.querySelector('.display');
+        if (!overlayDiv || !displayDiv) return;
+
+        const displayTop = displayDiv.querySelector('.display_top p');
+        const displaybot = displayDiv.querySelector('.display_bot p');
+        const overlayTop = displayDiv.querySelector('.overlay_top p');
+        const overlaybot = displayDiv.querySelector('.overlay_bottom p');
+        if (!displayTop) return;
+
+        const newValue = `${time[segment].first}${time[segment].second}`;
+        overlayDiv.classList.add('flip');
+        displayTop.textContent = newValue;
+        overlaybot.textContent = newValue;
+            
+        setTimeout(() => {
+            overlayDiv.classList.remove('flip');
+            displaybot.textContent = newValue;
+            overlayTop.textContent = newValue;
+                
+        }, 700);       
+    }
+        
+    useEffect(() => {
+        if(!compareTimeSegments('days')){
+            flip('days')
+        }
+        if(!compareTimeSegments('hours')){
+            flip('hours')
+        }
+        if(!compareTimeSegments('minutes')){
+            flip('minutes')
+        }
+        if(!compareTimeSegments('seconds')){
+            flip('seconds')
+        }
+        prevTime.current = time;
+
+        
+    }, [time]);
+    
+    
     useEffect(()=>{
         const interval = setInterval(()=>{
-        updateTime()
+            updateTime()
         },1000)
-
-
+        
+        
         return ()=> clearInterval(interval)
     },[])
+    
+    
+
+
 
     return (
-        <div  className="counterContainer">
-            <div className="timeSegment">
-                <div className="display" id="day">
+        <div ref={container}  className="counterContainer">
+            <div className="timeSegment" id="days">
+                <div className="display" >
                     <div className="display_top">
+                        <p></p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="display_bot">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
-                        
+                            <p>{time.days.first}{time.days.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                         <div className="overlay_bottom">
+                            <p>{time.days.first}{time.days.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                     </div>
                 </div>
-                <p>days</p>
+                <h1>days</h1>
             </div>
-            <div className="timeSegment">
+            <div className="timeSegment" id="hours">
                 <div className="display">
                     <div className="display_top">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="display_bot">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
+                            <p>{time.hours.first}{time.hours.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                         <div className="overlay_bottom">
+                            <p>{time.hours.first}{time.hours.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                     </div>
                 </div>
-                <p>hours</p>
+                <h1>hours</h1>
             </div>
-            <div className="timeSegment">
+            <div className="timeSegment" id="minutes">
                 <div className="display">
                     <div className="display_top">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="display_bot">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
+                            <p>{time.minutes.first}{time.minutes.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                         <div className="overlay_bottom">
+                            <p>{time.minutes.first}{time.minutes.second}</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                     </div>
                 </div>
-                <p>minutes</p>
+                <h1>minutes</h1>
             </div>
-            <div className="timeSegment">
+            <div  className="timeSegment" id="seconds">
                 <div className="display">
                     <div className="display_top">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="display_bot">
+                        <p>00</p>
                         <div style={{left:"-10px"}} className="round_thing"></div>
                         <div style={{right:"-10px"}} className="round_thing"></div>
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
+                            <p>00</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                         <div className="overlay_bottom">
+                            <p>00</p>
                             <div style={{left:"-10px"}} className="round_thing"></div>
                             <div style={{right:"-10px"}} className="round_thing"></div>
                         </div>
                     </div>
                 </div>
-                <p>seconds</p>
+                <h1>seconds</h1>
             </div>
         </div>
     )

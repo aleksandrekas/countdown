@@ -21,8 +21,9 @@
     align-items: center;
 }
 
-.timeSegment p{
+.timeSegment h1{
     color:#77768f;
+    font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -45,11 +46,15 @@
 }
 .display_top, .overlay_top{
     background: #2c2c44;
+    line-height: 2.1;
+    color: #d15071;
 }
 
 .display_bot, .overlay_bottom{
     background: #34364f;
     border-top: 1px solid #201d29;
+    line-height: 0;
+    color: #fd5c85;
 }
 
 .round_thing{
@@ -79,10 +84,10 @@
 }
 
 .overlay.flip .overlay_top{
-    animation: rotate 0.8s linear;
+    animation: rotate 0.8s linear infinite;
 }
 .overlay.flip .overlay_bottom{
-    animation: rotateBot 0.8s linear;
+    animation: rotateBot 0.8s linear infinite;
 }
 
 
@@ -95,6 +100,11 @@
 }
 
 
+p{
+    text-align: center;
+    font-size: 6rem;
+    font-weight: 700;
+}
 
 
 
