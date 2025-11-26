@@ -47,12 +47,12 @@ export default function Counter(){
         });
     }
 
-    function compareTimeSegments(segment:string){
+    function compareTimeSegments(segment:keyof timeType){
         return `${time[segment].first}${time[segment].second}` === `${prevTime.current[segment].first}${prevTime.current[segment].second}`
     }
 
 
-    function flip(segment:string){
+    function flip(segment:keyof timeType){
         const seconds = container.current?.querySelector(`#${segment}`);
         if (!seconds) return;
 
@@ -64,7 +64,7 @@ export default function Counter(){
         const displaybot = displayDiv.querySelector('.display_bot p');
         const overlayTop = displayDiv.querySelector('.overlay_top p');
         const overlaybot = displayDiv.querySelector('.overlay_bottom p');
-        if (!displayTop) return;
+        if (!displayTop || !overlaybot || !displaybot || !overlayTop) return;
 
         const newValue = `${time[segment].first}${time[segment].second}`;
         overlayDiv.classList.add('flip');
@@ -116,25 +116,21 @@ export default function Counter(){
             <div className="timeSegment" id="days">
                 <div className="display" >
                     <div className="display_top">
-                        <p></p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+                        <p>00</p>
+
                     </div>
                     <div className="display_bot">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
-                            <p>{time.days.first}{time.days.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+
                         </div>
                         <div className="overlay_bottom">
-                            <p>{time.days.first}{time.days.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+
                         </div>
                     </div>
                 </div>
@@ -144,24 +140,20 @@ export default function Counter(){
                 <div className="display">
                     <div className="display_top">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="display_bot">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
-                            <p>{time.hours.first}{time.hours.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+
                         </div>
                         <div className="overlay_bottom">
-                            <p>{time.hours.first}{time.hours.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+  
                         </div>
                     </div>
                 </div>
@@ -171,24 +163,20 @@ export default function Counter(){
                 <div className="display">
                     <div className="display_top">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+ 
                     </div>
                     <div className="display_bot">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
-                            <p>{time.minutes.first}{time.minutes.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+
                         </div>
                         <div className="overlay_bottom">
-                            <p>{time.minutes.first}{time.minutes.second}</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+                            <p>00</p>
+
                         </div>
                     </div>
                 </div>
@@ -198,24 +186,20 @@ export default function Counter(){
                 <div className="display">
                     <div className="display_top">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="display_bot">
                         <p>00</p>
-                        <div style={{left:"-10px"}} className="round_thing"></div>
-                        <div style={{right:"-10px"}} className="round_thing"></div>
+
                     </div>
                     <div className="overlay ">
                         <div className="overlay_top">
                             <p>00</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+
                         </div>
                         <div className="overlay_bottom">
                             <p>00</p>
-                            <div style={{left:"-10px"}} className="round_thing"></div>
-                            <div style={{right:"-10px"}} className="round_thing"></div>
+
                         </div>
                     </div>
                 </div>

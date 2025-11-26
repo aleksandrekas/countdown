@@ -3,13 +3,13 @@
 .counterContainer{
     width: 100%;
     max-width: 1000px;
-    max-height: 400px;
+    max-height: 300px;
     aspect-ratio: 16/6;
     z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0.5rem;
+    padding: 0 2rem;
 }
 
 .timeSegment{
@@ -19,13 +19,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    container-type: inline-size;
 }
 
 .timeSegment h1{
     color:#77768f;
-    font-size: 1rem;
+    font-size: clamp(0px,8cqi,1rem);
     font-weight: 900;
     text-transform: uppercase;
+    margin-top: 1rem;
 }
 
 
@@ -43,6 +45,7 @@
     height: 50%;
     overflow: hidden;
     position: relative;
+    container-type: inline-size;
 }
 .display_top, .overlay_top{
     background: #2c2c44;
@@ -57,21 +60,9 @@
     color: #fd5c85;
 }
 
-.round_thing{
-    background-color: #201d29;
-    width: 10%;
-    /* height: 20px; */
-    aspect-ratio: 2/2;
-    border-radius: 50%;
-    position: absolute;
-}
 
-.display_bot .round_thing, .overlay_bottom .round_thing{
-    top: -10px;
-}
-.display_top .round_thing, .overlay_top .round_thing{
-    bottom: -10px;
-}
+
+
 
 .overlay{
     position: absolute;
@@ -102,9 +93,11 @@
 
 p{
     text-align: center;
-    font-size: 6rem;
+    font-size: clamp(1rem,48cqi,6rem);
     font-weight: 700;
 }
+
+
 
 
 
